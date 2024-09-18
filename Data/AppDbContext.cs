@@ -10,6 +10,10 @@ namespace MinimalApi.Data
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlite("Data Source=Banco.databarber");
+
+            //var con = "Server=localhost;Database=databarber;Uid=root;Pwd=positivo;",
+            //optionsBuilder.UseMySQL(con);
+
             base.OnConfiguring(optionsBuilder);
         }
     }
