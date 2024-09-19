@@ -1,4 +1,5 @@
 using MinimalApi.Barbeiros;
+using MinimalApi.Clientes;
 using MinimalApi.Data;
 
 
@@ -25,6 +26,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.AddRotasBarbeiros();
+app.AddRotasClientes();
 
 app.Run();
 
