@@ -42,9 +42,9 @@ namespace MinimalApi.Barbeiros
                 return barbeiros;
             }).WithTags("Barbeiro");
 
-            rotasBarbeiro.MapGet("{nome}", async (string nome, AppDbContext context) =>
+            rotasBarbeiro.MapGet("{nome}", (string nome, AppDbContext context) =>
             {
-                var barbeiro = await context.Barbeiros.SingleOrDefaultAsync(barbeiro => barbeiro.Nome == nome);
+                var barbeiro = context.Barbeiros.Where(barbeiro => barbeiro.Nome == nome).Select(barbeiro => new BarbeiroDto(barbeiro.Id, barbeiro.Nome, barbeiro.Especialidade));
 
                 if (barbeiro == null)
                 {
