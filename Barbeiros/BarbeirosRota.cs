@@ -15,6 +15,12 @@ namespace MinimalApi.Barbeiros
 
             rotasBarbeiro.MapPost("", async (BarbeiroRequests request, AppDbContext context) =>
             {
+
+                if (string.IsNullOrEmpty(request.Nome) || string.IsNullOrEmpty(request.Senha))
+                {
+                    return Results.BadRequest("Nome e Senha são obrigatórios");
+                }
+                
                 var barbeiroExistente = await context.Barbeiros.AnyAsync(barbeiro => barbeiro.Nome == request.Nome);
 
                 if (barbeiroExistente)
