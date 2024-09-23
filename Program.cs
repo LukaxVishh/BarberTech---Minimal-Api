@@ -95,5 +95,6 @@ app.UseAuthorization();
 // Rotas adicionais
 app.AddRotasBarbeiros();
 app.AddRotasClientes();
+app.AddRotasAgenda();
 
 app.Run();
