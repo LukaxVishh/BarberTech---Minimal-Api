@@ -1,0 +1,29 @@
+POST https://localhost:5400/Agenda/Add
+Content-Type: application/json
+
+{
+    "nome": "Laercio",
+    "clienteNome": "Inacio de lurdez",
+    "dataAgendamento": "2024-09-25",
+    "horaAgendamento": "15:00",
+    "servicoConcluido": false
+}
+
+GET https://localhost:5400/agendamentos
+
+
+GET https://localhost:5400/agendamentos/{id}
+
+
+PUT https://localhost:5400/agendamentos/{id}
+Content-Type: application/json
+
+{
+    "nome": "João",
+    "clienteNome": "Maria",
+    "dataAgendamento": "2024-09-26",
+    "horaAgendamento": "16:00",
+    "servicoConcluido": true
+}
+
+DELETE https://localhost:5400/agendamentos/{id}

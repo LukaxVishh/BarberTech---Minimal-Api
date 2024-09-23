@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using MinimalApi.Agendas;
 using MinimalApi.Barbeiros;
 using MinimalApi.Clientes;
 
@@ -8,6 +9,8 @@ namespace MinimalApi.Data
     {
         public DbSet<Barbeiro> Barbeiros { get; set; }
         public DbSet<Cliente> Clientes {get; set; }
+
+        public DbSet<Agenda> Agenda { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
