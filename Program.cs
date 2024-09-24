@@ -96,5 +96,6 @@ app.UseAuthorization();
 app.AddRotasBarbeiros();
 app.AddRotasClientes();
 app.AddRotasAgenda();
+app.AddRotasServicos();
 
 app.Run();
