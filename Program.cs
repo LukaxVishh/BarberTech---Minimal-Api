@@ -79,7 +79,7 @@ app.MapPost("/login", (loginDTO login, IConfiguration configuration) =>
     return Results.Unauthorized();
 });
 
-// Configuração do pipeline HTTP
+// Configuração do pipeline HTTPS
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
