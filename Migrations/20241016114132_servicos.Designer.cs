@@ -12,7 +12,7 @@ namespace MinimalApi.Migrations
 {
     [DbContext(typeof(AppDbContext))]
     [Migration("20241016114132_servicos")]
-    partial class servicos
+    partial class Servicos
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

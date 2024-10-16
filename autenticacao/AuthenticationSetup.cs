@@ -9,7 +9,7 @@ namespace BarberTech.MinimalApi.Autenticacao
     {
         public static void AddJwtAuthentication(this IServiceCollection services, IConfiguration configuration)
         {
-            var key = Encoding.ASCII.GetBytes(configuration["Jwt:Key"]);
+            var key = Encoding.ASCII.GetBytes(configuration["Jwt:Key"]!);
             
             services.AddAuthentication(options =>
             {
