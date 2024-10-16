@@ -28,7 +28,7 @@ public static class RotasAgendaExtensions
             }
 
             // Verificar se a data e hora do agendamento são válidas
-            if (agendaRequest.DataAgendamento < DateTime.Now)
+            if (agendaRequest.DataAgendamento.ToDateTime(TimeOnly.MinValue) < DateTime.Now)
             {
                 return Results.BadRequest("A data do agendamento não pode ser no passado.");
             }

@@ -4,7 +4,7 @@ namespace MinimalApi.Agendas{
 {
     public required string Nome { get; init; }
     public required string ClienteNome { get; init; }
-    public required DateTime DataAgendamento { get; init; }
+    public required DateOnly DataAgendamento { get; init; }
     public required TimeOnly HoraAgendamento { get; init; }
     public required bool ServicoConcluido { get; init; }
 }
