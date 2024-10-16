@@ -13,6 +13,16 @@ public static class RotasAgendaExtensions
         {
             app.Logger.LogInformation("Processando criação de agendamento.");
 
+            try
+            {
+                var dataAgendamento = DateOnly.ParseExact(agendaRequest.DataAgendamento.ToString("dd/MM/yyyy"), "dd/MM/yyyy");
+                var horaAgendamento = TimeOnly.ParseExact(agendaRequest.HoraAgendamento.ToString("HH:mm"), "HH:mm");
+            }
+            catch (FormatException)
+            {
+                return Results.BadRequest("Formato de data ou hora inválido. Use o formato dd/MM/yyyy para data e HH:mm para hora.");
+            }
+
             // Verificar se o barbeiro existe
             var barbeiro = await db.Barbeiros.SingleOrDefaultAsync(b => b.Nome == agendaRequest.Nome);
             if (barbeiro == null)
@@ -87,7 +97,7 @@ public static class RotasAgendaExtensions
         }).WithTags("Agendamento");
 
         // Rota para atualizar um agendamento
-        rotas.MapPut("/{id}", async (Guid id, AppDbContext db, AgendaRequest agendaRequest) =>
+        _ = rotas.MapPut("/{id}", async (Guid id, AppDbContext db, AgendaRequest agendaRequest) =>
         {
             app.Logger.LogInformation($"Atualizando agendamento {id}.");
 
