@@ -1,7 +1,7 @@
 namespace MinimalApi.Agendas{
     public class AgendaDto
 {
-    public Guid AgendamentoId { get; set; }
+    public Guid Id { get; set; }
     public required string Nome { get; set; }
     public required string ClienteNome { get; set; }
     public DateTime DataAgendamento { get; set; }

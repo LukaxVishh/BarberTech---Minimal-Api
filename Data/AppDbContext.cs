@@ -2,6 +2,7 @@
 using MinimalApi.Agendas;
 using MinimalApi.Barbeiros;
 using MinimalApi.Clientes;
+using MinimalApi.Servicos;
 
 namespace MinimalApi.Data
 {
@@ -9,6 +10,8 @@ namespace MinimalApi.Data
     {
         public DbSet<Barbeiro> Barbeiros { get; set; }
         public DbSet<Cliente> Clientes {get; set; }
+
+        public DbSet<Servico> Servicos { get; set; }
 
         public DbSet<Agenda> Agenda { get; set; }
 
