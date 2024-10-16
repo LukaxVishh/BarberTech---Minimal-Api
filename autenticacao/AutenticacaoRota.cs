@@ -18,7 +18,7 @@ namespace MinimalApi.Autenticacao
                 }
 
                 return Results.Unauthorized();
-            });
+            }).WithTags("Autenticação");
         }
     }
 }
