@@ -17,6 +17,15 @@ builder.Services.AddJwtAuthentication(builder.Configuration);
 builder.Services.AddAuthorization();
 builder.Services.AddSingleton<JwtTokenService>();
 
+// Configuração de CORS para permitir requisições do front-end
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowReactApp",
+        policy => policy.WithOrigins("http://localhost:3000") // URL do front-end React
+                        .AllowAnyMethod()
+                        .AllowAnyHeader());
+});
+
 // Registrar serviços adicionais
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -37,6 +46,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+// Aplicar a política de CORS antes das outras configurações
+app.UseCors("AllowReactApp");
 
 // Ativar autenticação e autorização
 app.UseAuthentication();
