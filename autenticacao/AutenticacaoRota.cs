@@ -42,7 +42,7 @@ namespace MinimalApi.Autenticacao
                 }
 
                 // Cria um novo cliente
-                var newCliente = new Cliente(registerDto.Nome, registerDto.Telefone, registerDto.Senha)
+                var newCliente = new Cliente(registerDto.Nome, registerDto.Telefone, registerDto.Senha, registerDto.Email)
                 {
                     Email = registerDto.Email
                 };
