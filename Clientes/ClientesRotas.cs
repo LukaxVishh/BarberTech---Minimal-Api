@@ -17,7 +17,7 @@ namespace MinimalApi.Clientes
                 }
 
                 var senhaEncriptada = BCrypt.Net.BCrypt.HashPassword(c.Senha);
-                var novoCliente = new Cliente(c.Nome, c.Telefone, senhaEncriptada);
+                var novoCliente = new Cliente(c.Nome, c.Telefone, senhaEncriptada, c.Email);
 
                 await context.Clientes.AddAsync(novoCliente);
                 await context.SaveChangesAsync();
@@ -27,7 +27,7 @@ namespace MinimalApi.Clientes
 
             Rotas.MapGet("", (AppDbContext context) => 
             {
-                var clientes = context.Clientes.Select(cliente => new ClienteDTO(cliente.Id, cliente.Nome, cliente.Telefone));
+                var clientes = context.Clientes.Select(cliente => new ClienteDTO(cliente.Id, cliente.Nome, cliente.Telefone, cliente.Email));
 
                 return clientes;
             }).WithTags("Cliente");
@@ -41,7 +41,7 @@ namespace MinimalApi.Clientes
                     return Results.NotFound("Usuário não encontrado.");
                 }
                 
-                var cliente = new ClienteDTO(tempCliente.Id, tempCliente.Nome, tempCliente.Telefone);
+                var cliente = new ClienteDTO(tempCliente.Id, tempCliente.Nome, tempCliente.Telefone, tempCliente.Email);
 
                 return Results.Ok(cliente);
             }).WithTags("Cliente");

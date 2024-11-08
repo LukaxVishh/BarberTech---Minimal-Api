@@ -8,12 +8,13 @@ namespace MinimalApi.Clientes
         public string Telefone { get; set; }
         public string Email { get; set; } // Adicionando o campo Email
 
-        public Cliente(string nome, string telefone, string senha)
+        public Cliente(string nome, string telefone, string senha, string email)
         {
             Id = Guid.NewGuid();
             Nome = nome;
             Telefone = telefone;
             Senha = senha;
+            Email = email;
         }
     }
 }
