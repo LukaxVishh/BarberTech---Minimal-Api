@@ -1,5 +1,5 @@
 public class loginDTO
 {
-    public String Username { get; set; }
-    public String Password { get; set; }
+    public required String Username { get; set; } = String.Empty;
+    public required String Password { get; set; } = String.Empty;
 }

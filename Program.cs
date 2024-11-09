@@ -7,17 +7,21 @@ using MinimalApi.Servicos;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Defina a URL e a porta aqui
 builder.WebHost.UseUrls("https://localhost:5400");
 
-// Configurar a autenticação JWT (método extraído para outro arquivo)
-builder.Services.AddJwtAuthentication(builder.Configuration);
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(policy =>
+    {
+        policy.WithOrigins("http://localhost:3000")
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
+});
 
-// Adicionar o serviço de autorização
+builder.Services.AddJwtAuthentication(builder.Configuration);
 builder.Services.AddAuthorization();
 builder.Services.AddSingleton<JwtTokenService>();
-
-// Registrar serviços adicionais
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<AppDbContext>();
@@ -29,7 +33,6 @@ builder.Services.AddControllers().AddJsonOptions(options =>
 
 var app = builder.Build();
 
-// Configuração do pipeline HTTP
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -37,12 +40,10 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
-// Ativar autenticação e autorização
+app.UseCors();
 app.UseAuthentication();
 app.UseAuthorization();
 
-// Rotas adicionais
 app.AddRotasBarbeiros();
 app.AddRotasClientes();
 app.AddRotasAgenda();
