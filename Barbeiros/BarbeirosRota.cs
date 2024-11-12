@@ -63,7 +63,7 @@ namespace MinimalApi.Barbeiros
 
             // ROTA PARA ATUALIZAR DADOS DE UM BARBEIRO ESPECIFICO
 
-            rotasBarbeiro.MapPut("{nome}", async (string nome, BarbeiroRequests request, AppDbContext context) =>
+           rotasBarbeiro.MapPut("{nome}", async (string nome, BarbeiroRequests request, AppDbContext context) =>
             {
                 var barbeiro = await context.Barbeiros.SingleOrDefaultAsync(barbeiro => barbeiro.Nome == nome);
 
@@ -72,11 +72,30 @@ namespace MinimalApi.Barbeiros
                     return Results.NotFound("Usuário não encontrado");
                 }
 
-                barbeiro.AtualizarNome(request.Nome);
+                // Atualiza o nome, se fornecido
+                if (!string.IsNullOrEmpty(request.Nome))
+                {
+                    barbeiro.AtualizarNome(request.Nome); // Atualizando o nome com o método
+                }
+
+                // Atualiza a especialidade, se fornecido
+                if (!string.IsNullOrEmpty(request.Especialidade))
+                {
+                    barbeiro.AtualizarEspecialidade(request.Especialidade); // Atualizando a especialidade com o método
+                }
+
+                // Atualiza a senha, se fornecida
+                if (!string.IsNullOrEmpty(request.Senha))
+                {
+                    var senhaEncriptada = BCrypt.Net.BCrypt.HashPassword(request.Senha);
+                    barbeiro.AtualizarSenha(senhaEncriptada); // Atualizando a senha com o método
+                }
+
                 await context.SaveChangesAsync();
 
-                return Results.Ok(barbeiro);
-            }).WithTags("Barbeiro");
+                return Results.Ok(new BarbeiroDto(barbeiro.Id, barbeiro.Nome, barbeiro.Especialidade));
+            });
+
 
 
             // ROTA PARA DELETAR UM BARBEIRO ESPECIFICO
